@@ -4,6 +4,7 @@ namespace EmployeeTaskManager.API.Services.Interfaces
 {
     public interface IUserService
     {
+        Task<UserDto?> ValidateUserAsync(string email, string password);
         Task<UserDto> GetUserByIdAsync(int id);
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<UserDto> CreateUserAsync(UserDto userDto);

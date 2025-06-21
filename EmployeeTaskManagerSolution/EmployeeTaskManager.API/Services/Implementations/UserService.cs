@@ -83,6 +83,24 @@ namespace EmployeeTaskManager.API.Services.Implementations
             };
         }
 
+        public async Task<UserDto?> ValidateUserAsync(string email, string password)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+
+            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+                return null;
+
+            return new UserDto
+            {
+                UserId = user.UserId,
+                Username = user.Username,
+                Email = user.Email,
+                FullName = user.FullName,
+                Role = user.Role
+            };
+        }
+
+
         public async Task<bool> DeleteUserAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
