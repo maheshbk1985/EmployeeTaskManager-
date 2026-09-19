@@ -8,5 +8,10 @@ namespace EmployeeTaskManager.API.Controllers
         {
             return View();
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
